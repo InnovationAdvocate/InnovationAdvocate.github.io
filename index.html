@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Product Leader & Advisor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #f1f5f9;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #ffffff;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.3);
+            margin: 0 auto 2rem;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeInScale 0.8s ease-out;
+            overflow: hidden;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .cta-btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .cta-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .cta-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .cta-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        section {
+            margin-bottom: 6rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        #about {
+            background: var(--light-gray);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            max-width: 900px;
+            margin: 0 auto 6rem;
+        }
+
+        #about p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--gray);
+            text-align: center;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .company-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .company-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .company-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .company-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .company-logo {
+            width: 120px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: var(--light-gray);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .company-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .company-card .role {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .company-card p {
+            color: var(--gray);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .service-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .service-card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .book-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .book-cover {
+            width: 100%;
+            height: 300px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        .book-info {
+            padding: 2rem;
+        }
+
+        .book-info h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .book-info p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .book-link:hover {
+            background: var(--primary-dark);
+            transform: translateX(5px);
+        }
+
+        .talks-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            padding: 2rem;
+            background: var(--light-gray);
+            border-radius: 15px;
+        }
+
+        .talks-intro p {
+            font-size: 1.1rem;
+            color: var(--gray);
+        }
+
+        .talks-list {
+            display: grid;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .talk-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+        }
+
+        .talk-card:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .talk-content {
+            padding: 2.5rem;
+        }
+
+        .talk-card h3 {
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .talk-meta {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .talk-content > p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .talk-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .talk-image {
+            width: 100%;
+            height: 200px;
+            background: var(--light-gray);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+
+        .talk-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .talk-link {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--light-gray);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .talk-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .mentoring-cta {
+            background: var(--gradient);
+            color: white;
+            padding: 4rem 3rem;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mentoring-cta::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+        }
+
+        .mentoring-cta h2 {
+            color: white;
+            position: relative;
+        }
+
+        .mentoring-cta h2::after {
+            background: white;
+        }
+
+        .mentoring-cta p {
+            font-size: 1.2rem;
+            margin: 2rem auto;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .mentoring-btn {
+            padding: 1.2rem 3rem;
+            background: white;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .mentoring-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .contact-wrapper {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-intro p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+
+        .book-meeting-btn {
+            padding: 1.2rem 3rem;
+            background: var(--gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .book-meeting-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .contact-divider {
+            text-align: center;
+            margin: 3rem 0;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-family: inherit;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .profile-image {
+                width: 150px;
+                height: 150px;
+                font-size: 3rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 3rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .companies-grid,
+            .services-grid,
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-btn {
+                padding: 0.9rem 2rem;
+                font-size: 0.95rem;
+            }
+
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .talk-images {
+                grid-template-columns: 1fr;
+            }
+
+            .mentoring-cta {
+                padding: 3rem 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 0.8rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <div class="profile-image">👤</div>
+            <h1>Your Name</h1>
+            <p class="tagline">Product Leader • Author • Keynote Speaker • Mentor</p>
+            <div class="hero-cta">
+                <a href="#contact" class="cta-btn cta-primary">Let's Connect</a>
+                <a href="#services" class="cta-btn cta-secondary">Explore Services</a>
+            </div>
+        </div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#companies">Experience</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#books">Books</a></li>
+            <li><a href="#talks">Speaking</a></li>
+            <li><a href="#mentoring">Mentoring</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="about">
+            <p>With years of experience leading product organizations and advising companies on product strategy, I help businesses build products that customers love. As a fractional head of product and advisor, I bring strategic product leadership to organizations looking to scale their product capabilities.</p>
+        </section>
+
+        <section id="companies">
+            <h2>Companies I've Worked With</h2>
+            <div class="companies-grid">
+                <div class="company-card">
+                    <div class="company-logo">LOGO</div>
+                    <h3>Company Name 1</h3>
+                    <p class="role">Head of Product</p>
+                    <p>Led product strategy and built a world-class product team, scaling from 5 to 50 people while launching multiple successful products.</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">LOGO</div>
+                    <h3>Company Name 2</h3>
+                    <p class="role">Product Advisor</p>
+                    <p>Provided strategic guidance on product-market fit and go-to-market strategy, helping the company achieve Series B funding.</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">LOGO</div>
+                    <h3>Company Name 3</h3>
+                    <p class="role">VP of Product</p>
+                    <p>Drove product vision and roadmap execution, resulting in 3x user growth and expansion into new markets.</p>
+                </div>
+                <div class="company-card">
+                    <div class="company-logo">LOGO</div>
+                    <h3>Company Name 4</h3>
+                    <p class="role">Fractional CPO</p>
+                    <p>Established product management best practices and built the product roadmap for a fast-growing startup.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2>Services I Offer</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Fractional Head of Product</h3>
+                    <p>Provide strategic product leadership on a fractional basis. I help companies define product vision, build roadmaps, and establish product management best practices without the commitment of a full-time executive.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>Advisory Services</h3>
+                    <p>Strategic guidance on product strategy, organization design, and go-to-market approaches. I work with founders and executives to solve their most challenging product problems.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="books">
+            <h2>Books I've Written</h2>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-cover">Book Cover Image</div>
+                    <div class="book-info">
+                        <h3>Book Title 1</h3>
+                        <p>A comprehensive guide to building products that customers love. This book covers product strategy, user research, roadmap planning, and team leadership.</p>
+                        <a href="#" class="book-link">View on Amazon →</a>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover">Book Cover Image</div>
+                    <div class="book-info">
+                        <h3>Book Title 2</h3>
+                        <p>An essential resource for product leaders. Learn how to scale product organizations, build high-performing teams, and drive business impact.</p>
+                        <a href="#" class="book-link">View on Amazon →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="talks">
+            <h2>Speaking Engagements</h2>
+            <div class="talks-intro">
+                <p>I'm available for keynote speeches, panel discussions, and workshops on product management, product strategy, and innovation.</p>
+            </div>
+            
+            <h3 style="margin-top: 3rem; margin-bottom: 1.5rem; color: var(--dark); font-size: 1.8rem; text-align: center;">Previous Talks</h3>
+            <div class="talks-list">
+                <div class="talk-card">
+                    <div class="talk-content">
+                        <h3>Building Products Customers Love</h3>
+                        <div class="talk-meta">📍 Stanford University • Palo Alto, CA, USA</div>
+                        <p>A deep dive into customer-centric product development and how to build products that create lasting value. Explored frameworks for user research, product discovery, and validation.</p>
+                        <div class="talk-images">
+                            <div class="talk-image">📸 Event Photo 1</div>
+                            <div class="talk-image">📸 Event Photo 2</div>
+                        </div>
+                        <div class="talk-links">
+                            <a href="#" class="talk-link">View on LinkedIn</a>
+                            <a href="#" class="talk-link">Watch on YouTube</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="talk-card">
+                    <div class="talk-content">
+                        <h3>Product Strategy in the Age of AI</h3>
+                        <div class="talk-meta">📍 Tech Conference 2024 • San Francisco, CA, USA</div>
+                        <p>Exploring how artificial intelligence is reshaping product strategy and what product leaders need to know to stay ahead of the curve.</p>
+                        <div class="talk-images">
+                            <div class="talk-image">📸 Event Photo</div>
+                        </div>
+                        <div class="talk-links">
+                            <a href="#" class="talk-link">View on LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="talk-card">
+                    <div class="talk-content">
+                        <h3>Scaling Product Teams</h3>
+                        <div class="talk-meta">📍 MIT Sloan • Cambridge, MA, USA</div>
+                        <p>Best practices for growing and scaling product organizations from startup to enterprise. Covered hiring, team structure, and maintaining culture during rapid growth.</p>
+                        <div class="talk-images">
+                            <div class="talk-image">📸 Event Photo 1</div>
+                            <div class="talk-image">📸 Event Photo 2</div>
+                        </div>
+                        <div class="talk-links">
+                            <a href="#" class="talk-link">Watch on YouTube</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
